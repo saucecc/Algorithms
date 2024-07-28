@@ -28,7 +28,7 @@ class FloydWarshall:
             for i in range(n): 
                 for j in range(n): 
                     if dp[i][k] + dp[k][j] < dp[i][j]: 
-                        dp[i][j] = -float('inf')
+                        dp[i][j] = float('-inf')
                         next[i][j] = -1 
 
         pass
@@ -47,15 +47,8 @@ class FloydWarshall:
             return None 
         path.add(g)
         return path 
-
     
-    def getAllSourceShortestPath(self, graph, negCycles=False): 
-        """ main function """
-        n = len(graph)
-        dp = [[float('inf')] for _ in range(n)]  # init dp matrix 
-        next = [[-1] * n for _ in range(n)]      # matrix used to reconstruct actual shortest paths 
-
-
+    def setup(self, graph, dp, next, n): 
         """
         deep copy input matrix into dp 
         setup next matrix: if edge (i, j) exists, next node to go to from i is j 
@@ -65,6 +58,15 @@ class FloydWarshall:
                 dp[i][j] = graph[i][j]
             if graph[i][j] != float('inf'): 
                 next[i][j] = j
+
+    
+    def getAllSourceShortestPath(self, graph, negCycles=False): 
+        """ main function """
+        n = len(graph)
+        dp = [[float('inf')] for _ in range(n)]  # init dp matrix 
+        next = [[-1] * n for _ in range(n)]      # matrix used to reconstruct actual shortest paths 
+
+        self.setup(graph, dp, next, n)
 
         for k in range(n):  # building up best solutions for paths going through k = 0, ..., k - 1
             for i in range(n):  # examine all (i, j) pairs 
