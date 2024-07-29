@@ -1,0 +1,73 @@
+ -------------------------------------
+ ----- Interview Data Structures -----
+ -------------------------------------
+ 
+** Python **: 
+ lists: [] 
+ sets: set(), {v}
+ dictionaries: dict(), {k: v}
+ 
+ stack: use[] .append(), .pop() 
+ queue: for O(1) 
+	- import queue 
+	- queue.Queue()
+	- put(v), .get(), .empty() 
+ 
+ heaps: use heapq; methods:  
+	- [min heap by default]
+	- pq = [] 
+	- heapq.heappush(k, v) 
+	- heapq.heappop(pq)
+	- heapq.heapify(arr) 
+
+-------------------------------------
+** Java **: 
+arrays: int[] arr = new int[size]	
+lists: ArrayList<Type> = new ArrayList<>() 
+	utils: 
+		- list.subList(begin, end) - window of arr, 
+			can do new ArrayList<Type>(list.subList(begin, end)) for new 
+			
+sets: Set, HashSet 
+dictionaries: Map, HashMap 
+
+stack/queue: use LinkedList
+
+heaps: use PriorityQueue; [minHeap by default]
+	- PriorityQueue<Type> pq = new PriorityQueue<Type>(comparator?);
+		- ex: new PriorityQueue<Pair<Integer, V>>((p1, p2) -> p1.getKey().compareTo(p2.getKey())) 
+	- pq.add(v) 
+	- pq.poll() 
+	- pq.remove(v) 
+	- pq.contains(v) 
+	
+-------------------------------------
+** C++ **: 
+vectors: vector<type> vect(size, initValue), vect {x, y, ...};
+dictionaries: unordered_map<k, v> {}, {{k, v}, {k2, v2}} 
+sets: 
+	- unordered_set<type> s0 {};
+	- set.contains() 
+
+stack/queue: 
+	- deque<type> d1(size?, initVal?), d1{x, y, z} 
+	- .empty() 
+	- .size() 
+	- .push_back(v), .push_front(v) 
+	- .back(), .front() 
+	- .pop_back(), .pop_front() -> returns modified deque 
+	
+heaps: 
+	- maxheap by default 
+	- define vector 
+	- make_heap(heap.begin(), heap.end()) 
+	- to make it a min heap, 
+		make_heap(heap.begin(), heap.end(), greater<int>()) 
+	- inserting: 
+		- push_back(x)
+		- push_heap(heap.begin(), heap.end(), greater<int>()) 
+	- removing: 
+		- pop_heap(heap.begin(), heap.end(), greater<int>())
+		- heap.pop_back() 
+	
+	

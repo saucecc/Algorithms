@@ -9,7 +9,7 @@ class BellmanFord:
     Idea: Relax each edge so many times that we know we must have the right answer by the end 
         - the reason we relax every edge (n - 1) times is because in some next iteration we may 
         find a shorter path from s -> u, which could result in a shorter path from s -> v 
-        
+
         - assuming we make some distance optimization for every vertex on each iteration, we see we would 
         have relaxed every single vertex (excluding s as this is trivial) to its shortest distance 
     """
@@ -31,7 +31,7 @@ class BellmanFord:
         return res 
 
      
-    def getShortestPaths(self, s, graph): 
+    def bellmanFord(self, s, graph): 
         n = len(graph)
         d = [float('inf')] * n
         p = [-1] * n 
@@ -55,9 +55,13 @@ class BellmanFord:
 
         # check for negative weight cycles, update accordingly 
         for i in range(n - 1): 
+            updated = False
             for u, v, w in edges: 
                 if d[u] + w < d[v]: 
+                    updated = True 
                     d[v] = float('-inf')
+                if not updated: 
+                    break 
 
         self.distances = d 
         self.parents = p 

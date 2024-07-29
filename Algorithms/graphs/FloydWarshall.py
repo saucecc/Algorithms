@@ -12,7 +12,7 @@ class FloydWarshall:
         dp[i][j] = shortest path from i to j routing through {0, 1, ..., k-1, k}
 
     Proof Sketch: 
-        
+
 
     """
     
@@ -63,7 +63,7 @@ class FloydWarshall:
                     next[i][j] = j
 
     
-    def getAllSourceShortestPath(self, graph, negCycles=False): 
+    def floydWarshall(self, graph, negCycles=False): 
         """ main function """
         n = len(graph)
         dp = [[float('inf')] * n for _ in range(n)]  # init dp matrix 
@@ -86,3 +86,13 @@ class FloydWarshall:
         self.solution = dp 
 
         return dp 
+    
+
+    def main(): 
+        """main function for testing"""
+        g = [
+            []
+        ]
+
+    if __name__ == "__main__": 
+        main()
