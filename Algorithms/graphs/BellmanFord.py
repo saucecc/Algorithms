@@ -1,7 +1,17 @@
 class BellmanFord:
     
-    """
-    
+    """ 
+    Bellman Ford Algorithm: Single source shortest path (SSSP) algorithm 
+        - can handle negative edge weights and cycles
+
+    Time Complexity: O(m*n)
+
+    Idea: Relax each edge so many times that we know we must have the right answer by the end 
+        - the reason we relax every edge (n - 1) times is because in some next iteration we may 
+        find a shorter path from s -> u, which could result in a shorter path from s -> v 
+        
+        - assuming we make some distance optimization for every vertex on each iteration, we see we would 
+        have relaxed every single vertex (excluding s as this is trivial) to its shortest distance 
     """
     
     def __init__(self) -> None: 
@@ -43,11 +53,11 @@ class BellmanFord:
             if not updated: # no edge relaxations left, stop 
                 break 
 
-        # check for negative weight cycles 
-        for u, v, w in edges:
-            if d[u] != float('inf') and d[v] > d[u] + w:
-                print("Graph contains a negative-weight cycle")
-                return None
+        # check for negative weight cycles, update accordingly 
+        for i in range(n - 1): 
+            for u, v, w in edges: 
+                if d[u] + w < d[v]: 
+                    d[v] = float('-inf')
 
         self.distances = d 
         self.parents = p 
