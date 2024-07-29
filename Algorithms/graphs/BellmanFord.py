@@ -30,8 +30,17 @@ class BellmanFord:
         res.reverse() 
         return res 
 
+    def handleNegativeEdges(self, edges, d, n): 
+        for i in range(n - 1): 
+            updated = False
+            for u, v, w in edges: 
+                if d[u] + w < d[v]: 
+                    updated = True 
+                    d[v] = float('-inf')
+                if not updated: 
+                    break 
      
-    def bellmanFord(self, s, graph): 
+    def bellmanFord(self, s, graph, handleNegatives=True): 
         n = len(graph)
         d = [float('inf')] * n
         p = [-1] * n 
@@ -54,18 +63,19 @@ class BellmanFord:
                 break 
 
         # check for negative weight cycles, update accordingly 
-        for i in range(n - 1): 
-            updated = False
-            for u, v, w in edges: 
-                if d[u] + w < d[v]: 
-                    updated = True 
-                    d[v] = float('-inf')
-                if not updated: 
-                    break 
+        if handleNegatives:
+            self.handleNegativeEdges(edges, d, n)
 
         self.distances = d 
         self.parents = p 
         self.source = s
         return d 
+
+    
+    # TODO: some test cases
+    def main(): 
+        pass 
+    if __name__ == "__main__": 
+        main()
 
                 

@@ -63,7 +63,7 @@ class FloydWarshall:
                     next[i][j] = j
 
     
-    def floydWarshall(self, graph, negCycles=False): 
+    def floydWarshall(self, graph, handleNegatives=True): 
         """ main function """
         n = len(graph)
         dp = [[float('inf')] * n for _ in range(n)]  # init dp matrix 
@@ -78,7 +78,7 @@ class FloydWarshall:
                         dp[i][j] = dp[i][k] + dp[k][j]
                         next[i][j] = next[i][k]
 
-        if negCycles: 
+        if handleNegatives: 
             self.handleNegativeCycles(dp, n)
 
         self.graph = graph 
@@ -88,6 +88,8 @@ class FloydWarshall:
         return dp 
     
 
+
+    # TODO: some test cases
     def main(): 
         """main function for testing"""
         g = [
