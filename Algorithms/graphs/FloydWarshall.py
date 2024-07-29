@@ -11,6 +11,9 @@ class FloydWarshall:
     Idea: 
         dp[i][j] = shortest path from i to j routing through {0, 1, ..., k-1, k}
 
+    Proof Sketch: 
+        
+
     """
     
     def __init__(self): 
@@ -42,10 +45,10 @@ class FloydWarshall:
         while at != g: 
             if at == -1: 
                 return None 
-            path.add(at) 
+            path.append(at) 
         if self.next[at][g] == -1: 
             return None 
-        path.add(g)
+        path.append(g)
         return path 
     
     def setup(self, graph, dp, next, n): 
@@ -56,14 +59,14 @@ class FloydWarshall:
         for i in range(n): 
             for j in range(n): 
                 dp[i][j] = graph[i][j]
-            if graph[i][j] != float('inf'): 
-                next[i][j] = j
+                if graph[i][j] != float('inf'): 
+                    next[i][j] = j
 
     
     def getAllSourceShortestPath(self, graph, negCycles=False): 
         """ main function """
         n = len(graph)
-        dp = [[float('inf')] for _ in range(n)]  # init dp matrix 
+        dp = [[float('inf')] * n for _ in range(n)]  # init dp matrix 
         next = [[-1] * n for _ in range(n)]      # matrix used to reconstruct actual shortest paths 
 
         self.setup(graph, dp, next, n)
